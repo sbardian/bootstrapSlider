@@ -13,26 +13,19 @@
 add_option('bsSlider-Settings', null);
 get_option('bsSlider-Settings');
 
-function updateOptions() {
-    
-}
-
 function RenderSettings() { ?>
     <h1> Bootstrap Slider Settings</h1>
 
-      <form method="post" action="updateOptions">
+      <form method="post" action="options.php">
         <?php
         settings_fields('bsSlider-Settings');
-        do_settings_sections( 'bsSlider-Settings' );
-        $options = get_option('bsSlider_settings');
+        do_settings_sections('bsSlider-Settings');
         ?>
           <table class="form-table">
               <tr valign="top">
                   <th scope="row">Show arrow controls:</th>
                   <td>
-                      <input type="radio" name="bsSlider_settings[radio1]" value="true" <?php checked('true', $options['radio1']); ?> /> True<br />
-                      <input type="radio" name="bsSlider_settings[radio1]" value="false" <?php checked('false', $options['radio1']); ?> /> False<br />
-                      <input type="text" name="bsSlider-show-arrow-controls" value="<?php echo get_option( 'bsSlider-show-arrow-controls' ); ?>"/>
+                      <input type="text" name="title" value="<?php echo esc_attr( get_option('title') ); ?>"/>
                   </td>
               </tr>
           </table>
@@ -40,6 +33,12 @@ function RenderSettings() { ?>
       </form>
     <?php
 }
+
+function register_settings() {
+  register_setting('bsSlider-Settings', 'title');
+  register_setting('bsSlider-Settings', 'arrows-radio');
+}
+add_action( 'admin_init', 'register_settings' );
 
 function bootstrapSliderMenu()
 {
