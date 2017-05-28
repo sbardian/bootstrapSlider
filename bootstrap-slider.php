@@ -24,6 +24,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
     function init()
     {
 
+      // TODO: remove creation and deletion of db table if i never use it. . . 
       /**
        * Setup our database table on activation for storing sliders.
        *
