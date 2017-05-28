@@ -40,9 +40,8 @@
                             ?>
                             <img src="<?php echo $thumb_url ?>" alt="image1" style="width:100%;">
                             <div class="carousel-caption">
-                                <?php the_title(); ?>
-                                <br/>
-                                <?php the_content(); ?>
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php the_content(); ?></p>
                             </div>
                         </div>
                       <?php $index2++; ?>
