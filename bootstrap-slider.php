@@ -29,14 +29,14 @@ if ( !class_exists('bootstrapSlider' ) ) {
        * Setup our database table on activation for storing sliders.
        *
        */
-      function bootstrapSlider_activation() {
+      function bootstrapSlider_activation()
+      {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
         $db = $wpdb->prefix . "bootstrapSliderTable";
 
         // create the ECPT metabox database table
-        if($wpdb->get_var("show tables like '$db'") != $db)
-        {
+        if ($wpdb->get_var("show tables like '$db'") != $db) {
           $sql = "CREATE TABLE  $db  (
 		        id mediumint(9) NOT NULL AUTO_INCREMENT,
 		        caption TEXT NOT NULL,
@@ -48,23 +48,26 @@ if ( !class_exists('bootstrapSlider' ) ) {
           dbDelta($sql);
         }
       }
-      register_activation_hook( __FILE__, 'bootstrapSlider_activation' );
+
+      register_activation_hook(__FILE__, 'bootstrapSlider_activation');
 
       /**
        * Remove our database table on deactivation for storing sliders.
        *
        */
       // TODO: move this to uninstall instead of deactivation. . .
-      function bootstrapSlider_deactivation() {
+      function bootstrapSlider_deactivation()
+      {
         global $wpdb;
         $db = $wpdb->prefix . "bootstrapSliderTable";
 
-        if($wpdb->get_var("show tables like '$db'") == $db) {
+        if ($wpdb->get_var("show tables like '$db'") == $db) {
           $sql = "DROP TABLE IF EXISTS $db";
           $wpdb->query($sql);
         }
       }
-      register_deactivation_hook( __FILE__, 'bootstrapSlider_deactivation' );
+
+      register_deactivation_hook(__FILE__, 'bootstrapSlider_deactivation');
 
       /**
        * Add our style sheets.
@@ -73,12 +76,13 @@ if ( !class_exists('bootstrapSlider' ) ) {
       function bootstrapSlider_styles()
       {
         // Register the style like this for a plugin:
-        wp_register_style( 'bootstrap', plugins_url( '/public/css/bootstrap.min.css', __FILE__ ), array(), '20120208', 'all' );
+        wp_register_style('bootstrap', plugins_url('/public/css/bootstrap.min.css', __FILE__), array(), '20120208', 'all');
 
         // For either a plugin or a theme, you can then enqueue the style:
-        wp_enqueue_style( 'bootstrap' );
+        wp_enqueue_style('bootstrap');
       }
-      add_action( 'wp_enqueue_scripts', 'bootstrapSlider_styles' );
+
+      add_action('wp_enqueue_scripts', 'bootstrapSlider_styles');
 
 
       /**
@@ -88,12 +92,13 @@ if ( !class_exists('bootstrapSlider' ) ) {
       function bootstrapSlider_scripts()
       {
         // Register the script like this for a plugin:
-        wp_register_script( 'bootstrap', plugins_url( '/public/js/bootstrap.min.js', __FILE__ ) );
+        wp_register_script('bootstrap', plugins_url('/public/js/bootstrap.min.js', __FILE__));
 
         // For either a plugin or a theme, you can then enqueue the script:
-        wp_enqueue_script( 'bootstrap' );
+        wp_enqueue_script('bootstrap');
       }
-      add_action( 'wp_enqueue_scripts', 'bootstrapSlider_scripts' );
+
+      add_action('wp_enqueue_scripts', 'bootstrapSlider_scripts');
 
 
       /**
@@ -102,7 +107,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
        *
        *
        */
-      require 'admin/SliderSettings.php';
+      require 'admin/options.php';
 
       /**
        * Add our shortcode, will need to do more cool things. . .
@@ -120,40 +125,41 @@ if ( !class_exists('bootstrapSlider' ) ) {
           ob_end_clean();
           return $content;
         }
+
         add_shortcode('bootstrapSlider', 'bootstrapSlider_shortcode');
       }
-      add_action('init', 'bootstrapSlider_shortcodes_init');
 
+      add_action('init', 'bootstrapSlider_shortcodes_init');
 
 
       /**
        * Add our custom post type.
        *
        */
-      function create_posttype() {
+      function create_posttype()
+      {
 
-        register_post_type( 'sliders',
+        register_post_type('sliders',
             // CPT Options
             array(
                 'labels' => array(
-                    'name' => __( 'Sliders' ),
-                    'singular_name' => __( 'Slider' )
+                    'name' => __('Sliders'),
+                    'singular_name' => __('Slider')
                 ),
                 'public' => true,
                 'has_archive' => true,
                 'rewrite' => array('slug' => 'sliders'),
-                'show_in_menu' => 'boostrapSlider',
-                'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
+                'show_in_menu' => 'bootstrapSlider',
+                'supports' => array('title', 'editor', 'thumbnail', 'page-attributes'),
                 'hierarchical' => false,
             )
         );
       }
-      // Hooking up our function to theme setup
-      add_action( 'init', 'create_posttype' );
+      add_action('init', 'create_posttype');
 
     }
-
   }
+
   bootstrapSlider::init();
 }
 
