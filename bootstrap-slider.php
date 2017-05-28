@@ -142,6 +142,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
                 'has_archive' => true,
                 'rewrite' => array('slug' => 'sliders'),
                 'show_in_menu' => 'boostrapSlider',
+                'supports' => array( 'title', 'editor', 'thumbnail' ),
             )
         );
       }
