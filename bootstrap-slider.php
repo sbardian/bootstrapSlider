@@ -24,7 +24,10 @@ if ( !class_exists('bootstrapSlider' ) ) {
     function init()
     {
 
-
+      /**
+       * Add our style sheets.
+       *
+       */
       function bootstrapSlider_styles()
       {
         // Register the style like this for a plugin:
@@ -36,6 +39,10 @@ if ( !class_exists('bootstrapSlider' ) ) {
       add_action( 'wp_enqueue_scripts', 'bootstrapSlider_styles' );
 
 
+      /**
+       * Add our scripts.
+       *
+       */
       function bootstrapSlider_scripts()
       {
         // Register the script like this for a plugin:
@@ -56,7 +63,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
       require 'admin/SliderSettings.php';
 
       /**
-       * Add our shortcode will need to do more cool things. . .
+       * Add our shortcode, will need to do more cool things. . .
        * like get our data from db, and rendor the slider/etc.
        */
       function bootstrapSlider_shortcodes_init()
