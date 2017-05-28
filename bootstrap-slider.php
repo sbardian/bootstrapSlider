@@ -47,13 +47,13 @@ if ( !class_exists('bootstrapSlider' ) ) {
           dbDelta($sql);
         }
       }
-
       register_activation_hook( __FILE__, 'bootstrapSlider_activation' );
 
       /**
        * Remove our database table on deactivation for storing sliders.
        *
        */
+      // TODO: move this to uninstall instead of deactivation. . .
       function bootstrapSlider_deactivation() {
         global $wpdb;
         $db = $wpdb->prefix . "bootstrapSliderTable";
@@ -63,7 +63,6 @@ if ( !class_exists('bootstrapSlider' ) ) {
           $wpdb->query($sql);
         }
       }
-
       register_deactivation_hook( __FILE__, 'bootstrapSlider_deactivation' );
 
       /**
@@ -126,6 +125,28 @@ if ( !class_exists('bootstrapSlider' ) ) {
 
 
 
+      /**
+       * Add our custom post type.
+       *
+       */
+      function create_posttype() {
+
+        register_post_type( 'sliders',
+            // CPT Options
+            array(
+                'labels' => array(
+                    'name' => __( 'Sliders' ),
+                    'singular_name' => __( 'Slider' )
+                ),
+                'public' => true,
+                'has_archive' => true,
+                'rewrite' => array('slug' => 'sliders'),
+                'show_in_menu' => 'boostrapSlider',
+            )
+        );
+      }
+      // Hooking up our function to theme setup
+      add_action( 'init', 'create_posttype' );
 
     }
 
