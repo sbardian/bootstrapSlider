@@ -25,6 +25,48 @@ if ( !class_exists('bootstrapSlider' ) ) {
     {
 
       /**
+       * Setup our database table on activation for storing sliders.
+       *
+       */
+      function bootstrapSlider_activation() {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $db = $wpdb->prefix . "bootstrapSliderTable";
+
+        // create the ECPT metabox database table
+        if($wpdb->get_var("show tables like '$db'") != $db)
+        {
+          $sql = "CREATE TABLE  $db  (
+		        id mediumint(9) NOT NULL AUTO_INCREMENT,
+		        caption TEXT NOT NULL,
+		        image VARCHAR(2083) NOT NULL,
+		        UNIQUE KEY id (id)
+		      ) $charset_collate;";
+
+          require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+          dbDelta($sql);
+        }
+      }
+
+      register_activation_hook( __FILE__, 'bootstrapSlider_activation' );
+
+      /**
+       * Remove our database table on deactivation for storing sliders.
+       *
+       */
+      function bootstrapSlider_deactivation() {
+        global $wpdb;
+        $db = $wpdb->prefix . "bootstrapSliderTable";
+
+        if($wpdb->get_var("show tables like '$db'") == $db) {
+          $sql = "DROP TABLE IF EXISTS $db";
+          $wpdb->query($sql);
+        }
+      }
+
+      register_deactivation_hook( __FILE__, 'bootstrapSlider_deactivation' );
+
+      /**
        * Add our style sheets.
        *
        */
