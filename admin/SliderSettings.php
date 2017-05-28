@@ -6,6 +6,8 @@
  * Time: 9:31 PM
  */
 
+// TODO: Add some slider settings. git 
+
 function bootstrapSliderSettings()
 {
   // check user capabilities
