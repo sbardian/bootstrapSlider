@@ -20,7 +20,7 @@
                     <!-- Indicators -->
                 <?php
                 $index1 = 0;
-                $args = array('post_type' => 'sliders', 'posts_per_page' => 10 );
+                $args = array('post_type' => 'sliders', 'posts_per_page' => 10, 'order' => 'ASC', 'orderby'=>'menu_order' );
                 $the_query = new WP_Query($args);
                 if ( $the_query->have_posts() ) :
                     while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
