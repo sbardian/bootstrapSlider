@@ -8,16 +8,13 @@
  * Slider template
  * 
  */
-
-
 ?>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <!-- Indicators -->
+                <!-- Indicators -->
                 <?php
                 $options = get_option('bsSlider-Settings');
                 $index1 = 0;
@@ -51,7 +48,6 @@
                       <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
                   <?php endif; ?>
                 </div>
-
                 <!-- Controls -->
                 <?php
                     if ($options['arrows-radio']) { ?>
@@ -70,4 +66,3 @@
         </div>
     </div>
 </div>
-

@@ -23,7 +23,6 @@ if ( !class_exists('bootstrapSlider' ) ) {
   {
     function init()
     {
-
       // TODO: remove creation and deletion of db table if i never use it. . . 
       /**
        * Setup our database table on activation for storing sliders.
@@ -34,7 +33,6 @@ if ( !class_exists('bootstrapSlider' ) ) {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
         $db = $wpdb->prefix . "bootstrapSliderTable";
-
         // create the ECPT metabox database table
         if ($wpdb->get_var("show tables like '$db'") != $db) {
           $sql = "CREATE TABLE  $db  (
@@ -48,7 +46,6 @@ if ( !class_exists('bootstrapSlider' ) ) {
           dbDelta($sql);
         }
       }
-
       register_activation_hook(__FILE__, 'bootstrapSlider_activation');
 
       /**
@@ -66,7 +63,6 @@ if ( !class_exists('bootstrapSlider' ) ) {
           $wpdb->query($sql);
         }
       }
-
       register_deactivation_hook(__FILE__, 'bootstrapSlider_deactivation');
 
       /**
@@ -81,9 +77,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
         // For either a plugin or a theme, you can then enqueue the style:
         wp_enqueue_style('bootstrap');
       }
-
       add_action('wp_enqueue_scripts', 'bootstrapSlider_styles');
-
 
       /**
        * Add our scripts.
@@ -97,9 +91,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
         // For either a plugin or a theme, you can then enqueue the script:
         wp_enqueue_script('bootstrap');
       }
-
       add_action('wp_enqueue_scripts', 'bootstrapSlider_scripts');
-
 
       /**
        * Add our Settings menu to Admin
@@ -125,12 +117,9 @@ if ( !class_exists('bootstrapSlider' ) ) {
           ob_end_clean();
           return $content;
         }
-
         add_shortcode('bootstrapSlider', 'bootstrapSlider_shortcode');
       }
-
       add_action('init', 'bootstrapSlider_shortcodes_init');
-
 
       /**
        * Add our custom post type.
@@ -138,7 +127,6 @@ if ( !class_exists('bootstrapSlider' ) ) {
        */
       function create_posttype()
       {
-
         register_post_type('sliders',
             // CPT Options
             array(
@@ -156,11 +144,9 @@ if ( !class_exists('bootstrapSlider' ) ) {
         );
       }
       add_action('init', 'create_posttype');
-
     }
   }
-
   bootstrapSlider::init();
 }
-
 ?>
+

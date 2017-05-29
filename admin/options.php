@@ -14,7 +14,6 @@ $default_options = array(
     'title' => 'Fake Title',
     'arrows-radio' => 1
 );
-
 add_option('bsSlider-Settings', $default_options);
 
 function RenderSettings() { ?>
@@ -62,7 +61,6 @@ function bootstrapSliderMenu()
         null,
         null
     );
-
   add_submenu_page(
       'bootstrapSlider',
       'Bootstrap Slider Settings',
@@ -73,5 +71,4 @@ function bootstrapSliderMenu()
   );
 }
 add_action('admin_menu', 'bootstrapSliderMenu');
-
 ?>
