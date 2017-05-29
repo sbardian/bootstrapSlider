@@ -18,9 +18,17 @@ Author: Brian Andrews
 
 <?php
 
+/**
+ * Create our class.
+ *
+ */
 if ( !class_exists('bootstrapSlider' ) ) {
   class bootstrapSlider
   {
+    /**
+     * Init function.
+     *
+     */
     function init()
     {
       // TODO: remove creation and deletion of db table if i never use it. . . 
@@ -85,10 +93,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
        */
       function bootstrapSlider_scripts()
       {
-        // Register the script like this for a plugin:
         wp_register_script('bootstrap', plugins_url('/public/js/bootstrap.min.js', __FILE__));
-
-        // For either a plugin or a theme, you can then enqueue the script:
         wp_enqueue_script('bootstrap');
       }
       add_action('wp_enqueue_scripts', 'bootstrapSlider_scripts');
@@ -104,6 +109,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
       /**
        * Add our shortcode, will need to do more cool things. . .
        * like get our data from db, and rendor the slider/etc.
+       *
        */
       function bootstrapSlider_shortcodes_init()
       {
@@ -146,6 +152,11 @@ if ( !class_exists('bootstrapSlider' ) ) {
       add_action('init', 'create_posttype');
     }
   }
+
+  /**
+   * Call our class.
+   *
+   */
   bootstrapSlider::init();
 }
 ?>

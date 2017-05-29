@@ -8,14 +8,21 @@
 ?>
 
 <?php
-// TODO: Add some slider settings. git
 
+/**
+ * Set some default options for our Slider Settings.
+ *
+ */
 $default_options = array(
     'title' => 'Fake Title',
     'arrows-radio' => 1
 );
 add_option('bsSlider-Settings', $default_options);
 
+/**
+ * Render our settings page.
+ *
+ */
 function RenderSettings() { ?>
     <h1> Bootstrap Slider Settings</h1>
     <?php $options = get_option('bsSlider-Settings'); ?>
@@ -45,11 +52,17 @@ function RenderSettings() { ?>
     <?php
 }
 
+/**
+ * Register our settings.
+ */
 function register_settings() {
   register_setting('bsSlider-Settings', 'bsSlider-Settings');
 }
 add_action( 'admin_init', 'register_settings' );
 
+/**
+ * Add our menu and submenu to the Admin Dashboard.
+ */
 function bootstrapSliderMenu()
 {
   add_menu_page(
