@@ -19,6 +19,7 @@
                 <ol class="carousel-indicators">
                     <!-- Indicators -->
                 <?php
+                $options = get_option('bsSlider-Settings');
                 $index1 = 0;
                 $args = array('post_type' => 'sliders', 'posts_per_page' => 10, 'order' => 'ASC', 'orderby'=>'menu_order' );
                 $the_query = new WP_Query($args);
@@ -52,6 +53,8 @@
                 </div>
 
                 <!-- Controls -->
+                <?php
+                    if ($options['arrows-radio']) { ?>
                 <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -60,6 +63,9 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
