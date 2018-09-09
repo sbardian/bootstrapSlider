@@ -29,7 +29,7 @@ if ( !class_exists('bootstrapSlider' ) ) {
      * Init function.
      *
      */
-    function init()
+    public static function init()
     {
       // TODO: remove creation and deletion of db table if i never use it. . . 
       /**
