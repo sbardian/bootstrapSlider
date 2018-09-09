@@ -70,7 +70,7 @@ function bootstrapSliderMenu()
         'BootStrap Slider',
         'manage_options',
         'bootstrapSlider',
-        bootstrapSliderSettings,
+        'bootstrapSliderSettings',
         null,
         null
     );
